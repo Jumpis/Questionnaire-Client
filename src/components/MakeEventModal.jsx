@@ -24,7 +24,7 @@ class MakeEventModal extends React.Component {
     super(props);
     this.state = {
       options : {
-        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lc3NpIiwiZW1haWwiOiJtZXNzaUBuYXZlci5jb20iLCJpYXQiOjE1ODY3NTQyNjgsImV4cCI6MTU4Njc5MDI2OH0.FsfvnkuTj1yRTfD4B-C70izB5hHMAK4ypKfxnbrsZwY` }
+        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4Njc5MTgwMCwiZXhwIjoxNTg2ODI3ODAwfQ.90zJCwGARBAsvBXNMY4ROMrmuKaaJ47GD-baqufgidI` }
       },
       eventname: null,
       codename: null,
@@ -59,7 +59,7 @@ class MakeEventModal extends React.Component {
 
   handleSubmit = (event) => {
     const {
-      errors, eventname, codename, presentatorid,
+      errors, eventname, codename,
     } = this.state;
     const { onCancel } = this.props;
     event.preventDefault();

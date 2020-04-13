@@ -6,12 +6,9 @@ import UserLogin from './components/UserLogin';
 import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import TestEntry from './components/EventEntry';
-<<<<<<< HEAD
 import EventPage from './components/EventPage';
-=======
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
->>>>>>> 9c24f8fa2e3bf0105a7b5dceab842b28513200f2
 
 export default function App() {
 

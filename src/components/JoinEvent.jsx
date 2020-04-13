@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import Cookiemon from '../assets/img/cookiemon.png';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
+import axios from 'axios'
+
 
 const validateForm = (errors) => {
   let valid = true;
@@ -50,6 +52,17 @@ class JoinEvent extends React.Component {
     if (validateForm(errors)) {
       console.info('Valid Form');
       // 질문방 참여 request
+      axios.post('http://localhost:3306/audience/join', {
+        code_name : eventcode
+      })
+      .then(result => {
+        console.log(result)
+        if(!result.data.eventId){
+          this.props.history.push(`/joinEventPage`)
+        } else {
+          this.props.history.push(`/eventPage?eventId=${result.data.eventId}`)
+        }
+      })
     } else {
       console.error('Invalid Form');
     }

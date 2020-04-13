@@ -38,8 +38,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function EventEntry({ event : { eventname, code_name, createdAt} }) {
-
-  console.log(eventname, code_name, createdAt)
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

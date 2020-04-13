@@ -74,9 +74,8 @@ class SignUpModal extends React.Component {
         username,
       })
       .then(data => {
-        console.log(data);
+        onCancel();
       })
-      onCancel();
     } else {
       console.error('Invalid Form');
     }
