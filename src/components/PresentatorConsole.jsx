@@ -7,6 +7,7 @@ import { Portal } from 'react-portal';
 import Sidepic from '../assets/img/sidepic.jpg';
 import EventEntry from './EventEntry';
 import MakeEventModal from './MakeEventModal';
+import axios from 'axios'
 
 
 class PresentatorConsole extends React.Component {
@@ -14,6 +15,11 @@ class PresentatorConsole extends React.Component {
     super(props);
     this.state = {
       confirmationPopup: false,
+      options : {
+        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lc3NpIiwiZW1haWwiOiJtZXNzaUBuYXZlci5jb20iLCJpYXQiOjE1ODY3NTQyNjgsImV4cCI6MTU4Njc5MDI2OH0.FsfvnkuTj1yRTfD4B-C70izB5hHMAK4ypKfxnbrsZwY` }
+      },
+      isLoaded : false,
+      eventList : ''
     };
   }
 
@@ -25,8 +31,33 @@ class PresentatorConsole extends React.Component {
     this.setState({ confirmationPopup: false });
   };
 
+  getList = () => {
+    axios.get( 
+      'http://localhost:3306/presentor/list', 
+      this.state.options)
+      .then(result => {
+        console.log('this is event list : ', result)
+        this.setState({
+          eventList : result.data,
+          isLoaded : true
+        }) 
+      })
+  }
+
+  reReder = () => {
+    this.getList();
+  }
+
+  componentDidMount = () => {
+    this.getList();
+  }
+
   render() {
-    const { confirmationPopup } = this.state;
+    const { confirmationPopup, isLoaded, eventList } = this.state;
+    console.log(eventList)
+    if(!isLoaded){
+      return (<div>Loading</div>)
+    } else {
     return (
       <div className="presentatorConsole">
         <nav className="navbar navbar-light navbar-expand-md navigation-clean">
@@ -51,6 +82,7 @@ class PresentatorConsole extends React.Component {
                     <Portal>
                       <MakeEventModal
                         onCancel={() => this.close()}
+                        reRender={this.reReder}
                       />
                     </Portal>
                     )}
@@ -59,9 +91,9 @@ class PresentatorConsole extends React.Component {
                 <div className="row">
                   <div className="col">
                     <ul className="EventEntryList">
-                      <li><EventEntry /></li>
-                      <li><EventEntry /></li>
-                      <li><EventEntry /></li>
+                      {eventList.map(event =>  
+                        <EventEntry key={event.id} event={event}/>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -85,6 +117,7 @@ class PresentatorConsole extends React.Component {
         </div>
       </div>
     );
+                    }
   }
 }
 
