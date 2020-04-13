@@ -6,8 +6,12 @@ import UserLogin from './components/UserLogin';
 import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import TestEntry from './components/EventEntry';
+<<<<<<< HEAD
+import EventPage from './components/EventPage';
+=======
 import React, { useState, useEffect } from "react";
 
+>>>>>>> 9c24f8fa2e3bf0105a7b5dceab842b28513200f2
 
 export default function App() {
 
@@ -24,6 +28,7 @@ export default function App() {
         <Route exact path="/mainpage" render={() => <Mainpage />} />
         <Route exact path="/joinEventPage" render={() => <JoinEvent />} />
         <Route exact path="/presentatorConsole" render={() => <PresentatorConsole />} />
+        <Route exact path="/eventPage" render={()=><EventPage />} />
         <Route exact path="/testEntry" render={() => <TestEntry />} />
         <Route exact path="/login" render={ () => {
           if(!isLogin){

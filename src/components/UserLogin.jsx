@@ -6,15 +6,19 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Portal } from 'react-portal';
 import SignUpModal from './SignUpModal';
+import CommonFooter from './CommonFooter';
+import Copywrite from './Copywrite';
 import axios from 'axios'
 
 // eslint-disable-next-line no-useless-escape
-const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const validEmailRegex = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
 const validateForm = (errors) => {
   let valid = true;
   Object.values(errors).forEach(
     // eslint-disable-next-line no-return-assign
-    (val) => val.length > 0 && (valid = false),
+    (val) => val.length > 0 && (valid = false)
   );
   return valid;
 };
@@ -39,21 +43,17 @@ class UserLogin extends React.Component {
 
     switch (name) {
       case 'email':
-        errors.email = validEmailRegex.test(value)
-          ? ''
-          : 'Email is not valid!';
+        errors.email = validEmailRegex.test(value) ? '' : 'Email is not valid!';
         break;
       case 'password':
-        errors.password = value.length < 1
-          ? 'Password must be inserted!'
-          : '';
+        errors.password = value.length < 1 ? 'Password must be inserted!' : '';
         break;
       default:
         break;
     }
 
     this.setState({ errors, [name]: value });
-  }
+  };
 
   handleSubmit = (event) => {
     const { errors, email, password } = this.state;
@@ -81,7 +81,7 @@ class UserLogin extends React.Component {
     } else {
       console.error('Invalid Form');
     }
-  }
+  };
 
   open = () => {
     this.setState({ confirmationPopup: true });
@@ -90,7 +90,6 @@ class UserLogin extends React.Component {
   close = () => {
     this.setState({ confirmationPopup: false });
   };
-
 
   render() {
     const { confirmationPopup, errors } = this.state;
@@ -111,8 +110,9 @@ class UserLogin extends React.Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {errors.email.length > 0
-                && <span className="error">{errors.email}</span>}
+              {errors.email.length > 0 && (
+                <span className="error">{errors.email}</span>
+              )}
             </div>
             <div className="form-group password">
               <input
@@ -123,8 +123,9 @@ class UserLogin extends React.Component {
                 onChange={this.handleChange}
                 noValidate
               />
-              {errors.password.length > 0
-                && <span className="error">{errors.password}</span>}
+              {errors.password.length > 0 && (
+                <span className="error">{errors.password}</span>
+              )}
             </div>
             <div className="form-group">
               <div className="form-row">
@@ -143,9 +144,7 @@ class UserLogin extends React.Component {
                   </button>
                   {confirmationPopup && (
                     <Portal>
-                      <SignUpModal
-                        onCancel={() => this.close()}
-                      />
+                      <SignUpModal onCancel={() => this.close()} />
                     </Portal>
                   )}
                 </div>
@@ -153,23 +152,8 @@ class UserLogin extends React.Component {
             </div>
           </form>
         </div>
-        <footer className="footer text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4">
-                <h4 className="text-uppercase mb-4">Potato peel pie society</h4>
-                <p className="lead mb-0">
-                  <span>&nbsp;</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
-        <div className="copyright py-4 text-center text-white">
-          <div className="container">
-            <small>Copyright ©&nbsp;PPPS 2020</small>
-          </div>
-        </div>
+        <CommonFooter />
+        <Copywrite />
       </div>
     );
   }
