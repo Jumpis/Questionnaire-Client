@@ -6,6 +6,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios'
+
 
 // eslint-disable-next-line no-useless-escape
 const validEmailRegex = RegExp(
@@ -66,6 +68,14 @@ class SignUpModal extends React.Component {
     if (validateForm(errors)) {
       console.info('Valid Form');
       // request
+      axios.post('http://localhost:3306/user/signup', {
+        email,
+        password,
+        username,
+      })
+      .then(data => {
+        console.log(data);
+      })
       onCancel();
     } else {
       console.error('Invalid Form');
