@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventEntry() {
+export default function EventEntry({ event : { eventname, code_name, createdAt} }) {
+
+  console.log(eventname, code_name, createdAt)
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -59,12 +61,12 @@ export default function EventEntry() {
             <DeleteIcon />
           </IconButton>
         )}
-        title="PPPS 런칭이벤트 설문"
-        subheader="April 10, 2020"
+        title={eventname}
+        subheader={createdAt}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          PPPS 런칭이벤트 설문입니다. Made By 김환, 전진철, 머지빌런
+          {code_name}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

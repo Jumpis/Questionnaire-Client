@@ -6,6 +6,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios'
+
 
 // eslint-disable-next-line no-useless-escape
 const validateForm = (errors) => {
@@ -21,6 +23,9 @@ class MakeEventModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      options : {
+        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lc3NpIiwiZW1haWwiOiJtZXNzaUBuYXZlci5jb20iLCJpYXQiOjE1ODY3NTQyNjgsImV4cCI6MTU4Njc5MDI2OH0.FsfvnkuTj1yRTfD4B-C70izB5hHMAK4ypKfxnbrsZwY` }
+      },
       eventname: null,
       codename: null,
       presentatorid: null,
@@ -29,6 +34,7 @@ class MakeEventModal extends React.Component {
         eventname: '',
         codename: '',
       },
+      isLoaded : false,
     };
   }
 
@@ -59,6 +65,20 @@ class MakeEventModal extends React.Component {
     event.preventDefault();
     if (validateForm(errors)) {
       console.info('Valid Form');
+      axios.post( 
+        'http://localhost:3306/presentor/create', {
+        eventname,
+        codename,
+        // presentatorid : 6
+      }, this.state.options)
+      .then( data => {        
+        this.props.reRender();
+
+      })
+      .catch(err => {
+        console.log(err)
+      });
+
       onCancel();
     } else {
       console.error('Invalid Form');
