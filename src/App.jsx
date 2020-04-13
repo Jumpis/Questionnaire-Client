@@ -6,6 +6,7 @@ import UserLogin from './components/UserLogin';
 import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import TestEntry from './components/EventEntry';
+import EventPage from './components/EventPage';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route exact path="/userLoginPage" render={() => <UserLogin />} />
         <Route exact path="/joinEventPage" render={() => <JoinEvent />} />
         <Route exact path="/presentatorConsole" render={() => <PresentatorConsole />} />
+        <Route exact path="/eventPage" render={()=><EventPage />} />
         <Route exact path="/testEntry" render={() => <TestEntry />} />
         <Route path="/" render={() => <Redirect to="/mainpage" />} />
       </Switch>
