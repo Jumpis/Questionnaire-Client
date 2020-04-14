@@ -50,7 +50,7 @@ export default function PresentatorQuestionEntry() {
             3PS
           </Avatar>
         }
-        title="PPPS 런칭이벤트 설문"
+        title="질문자명" //props.wr
         subheader="April 10, 2020"
       />
       <CardContent>
