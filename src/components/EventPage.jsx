@@ -18,16 +18,32 @@ const EventPage = ({ location }) => {
   const [found, setFound] = useState(true);
   const { eventId } = queryString.parse(location.search);
 
+  const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4'
+  const authKey = localStorage.getItem('authKey');
+
   const sendMessage = (content) => {
-    return socket.emit('sendMessage', { content, eventId });
+    console.log('this is authKey to send : ', authKey)
+    return socket.emit('sendMessage', { content, eventId, authKey });
   };
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    socket.emit('join', { eventId });
+
+    socket.emit('join', { eventId , authKey });
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
+    socket.on('authKey', data => {
+      if(!localStorage.getItem('authKey')){
+        localStorage.setItem('authKey', data.newAuthKey);
+      };
+    })
+
+    socket.on('needNewKey', data => {
+      localStorage.removeItem('authKey');
+      socket.emit('join', { eventId, authKey })
+    });
+
     socket.on('notfound', () => {
       setFound(false);
     });

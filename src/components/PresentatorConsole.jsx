@@ -10,7 +10,7 @@ import MakeEventModal from './MakeEventModal';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 class PresentatorConsole extends React.Component {
   constructor(props) {
@@ -54,9 +54,13 @@ class PresentatorConsole extends React.Component {
     this.getList();
   };
 
+  handleLogOut = () => {
+    // todo;
+  };
+
   render() {
     const { confirmationPopup, isLoaded, eventList } = this.state;
-    if (!isLoaded) {
+    if (!isLoaded) {  
       return <div>Loading</div>;
     } else {
       return (
@@ -65,7 +69,21 @@ class PresentatorConsole extends React.Component {
             <div className="container">
               <div className="navbar-brand">Company Name</div>
               <div className="collapse navbar-collapse" id="navcol-1">
-                <ul className="nav navbar-nav ml-auto" />
+                <ul className="nav navbar-nav ml-auto">
+                  <li className="nav-item" role="presentation">
+                    <div
+                      className="nav-link active"
+                      onClick={() => {
+                        alert('clicked!')
+                        
+                        this.props.logoutHandler();
+                        this.props.history.push('/');
+                      }}
+                    >
+                      Log Out
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </nav>

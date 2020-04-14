@@ -13,6 +13,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import Badge from '@material-ui/core/Badge';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
+import useStateWithCallback from 'use-state-with-callback';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,14 +38,16 @@ const useStyles = makeStyles((theme) => ({
 export default function PresentatorQuestionEntry({ question, sendAnswered }) {
   const classes = useStyles();
 
-  const [answered, setAnswered] = React.useState(false);
-
-  const handleAnswered = () => {
-    setAnswered(!answered);
+  const [answered, setAnswered] = useStateWithCallback(question.answered, answered => {
     // 소켓아이오 연결해서 서버를 통해 DB asnwered 부분 변경 요청 보내기
     sendAnswered(answered, question.id);
+  })
 
+  const handleAnswered = () => {
+    setAnswered(!answered)
   };
+
+
   return (
     <Card className={classes.root}>
       <CardHeader

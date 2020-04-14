@@ -18,6 +18,7 @@ const validateForm = (errors) => {
   return valid;
 };
 
+
 class JoinEvent extends React.Component {
   constructor(props) {
     super(props);
@@ -49,6 +50,7 @@ class JoinEvent extends React.Component {
   handleSubmit = (event) => {
     const { errors, eventcode } = this.state;
     event.preventDefault();
+
     if (validateForm(errors)) {
       console.info('Valid Form');
       // 질문방 참여 request
@@ -56,7 +58,6 @@ class JoinEvent extends React.Component {
         code_name : eventcode
       })
       .then(result => {
-        console.log(result)
         if(!result.data.eventId){
           this.props.history.push(`/joinEventPage`)
         } else {
