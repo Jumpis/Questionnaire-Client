@@ -24,7 +24,7 @@ class MakeEventModal extends React.Component {
     super(props);
     this.state = {
       options : {
-        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4Njc5MTgwMCwiZXhwIjoxNTg2ODI3ODAwfQ.90zJCwGARBAsvBXNMY4ROMrmuKaaJ47GD-baqufgidI` }
+        headers : { 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4` }
       },
       eventname: null,
       codename: null,

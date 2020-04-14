@@ -16,44 +16,35 @@ let socket;
 const EventPage = ( { location } ) => {
 
   const ENDPOINT = "localhost:3306";
-  const [content, setContent] = useState('')
   const [questions, setQuestions] = useState([]);
-  // const [stateEventId, setStateEventId] = useState('')
   const [found, setFound] = useState(true)
+  const { eventId } = queryString.parse(location.search);
 
-  console.log('this is questions : ', questions)
-
-  function getContent(content){
-    setContent(content)
+  const sendMessage = (content) => {
+    return socket.emit('sendMessage', { content, eventId })
   };
 
   useEffect(() => {
-    const { eventId } = queryString.parse(location.search);
     socket = io(ENDPOINT);
-
-    // setStateEventId(eventId)    
-    // console.log('this is eventId : ', stateEventId)
-
-
     socket.emit('join', { eventId })
     }, [ENDPOINT, location.search])
 
 
   useEffect(() => {
-    const { eventId } = queryString.parse(location.search);
-
     socket.on('notfound', () => {
       setFound(false);
     })
 
     socket.on('allMessages', result => {
-      console.log('these are questions : ', result)
       setQuestions(result.data);
+
+      // questions.sort(function(a,b){
+      //   return (b.createdAt) - (a.createdAt);
+      // });
+      // console.log(questions)
+
     });
-    socket.emit('sendMessage', { content, eventId })
   }, [])
-
-
 
   return (
     <div className="presentatorConsole">
@@ -73,14 +64,16 @@ const EventPage = ( { location } ) => {
           <div className="row">
             <div className="col">
               <div className="row">
-                <QuestionForm getContent={getContent} />
+                <QuestionForm sendMessage={sendMessage} />
               </div>
               <div className="row">
                 <div className="col">
                   <ul className="EventEntryList">
-                    {questions.map( question => (
+                    {
+                    questions.map( question => question)
+                    .sort((a,b) => b.id - a.id).map(question => (
                       <li key={question.id}><QuestionEntry question={question}/></li>
-                    ) )}
+                    ))}
                   </ul>
                 </div>
               </div>

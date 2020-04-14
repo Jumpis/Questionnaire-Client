@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-const Mainpage = ({ getContent }) => {
+const Mainpage = ({ sendMessage }) => {
 
   const [content, setContent] = useState('');
   const handleChange = (e) => {
@@ -9,11 +9,9 @@ const Mainpage = ({ getContent }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    getContent(content);
-
+    sendMessage(content);
 
   }
-
 
   return (
     <div className="questionForm">
