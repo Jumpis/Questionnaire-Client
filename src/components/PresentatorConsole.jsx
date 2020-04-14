@@ -7,10 +7,10 @@ import { Portal } from 'react-portal';
 import Sidepic from '../assets/img/sidepic.jpg';
 import EventEntry from './EventEntry';
 import MakeEventModal from './MakeEventModal';
-import QuestionEntry from './QuestionEntry';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 class PresentatorConsole extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class PresentatorConsole extends React.Component {
       confirmationPopup: false,
       options: {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lc3NpIiwiZW1haWwiOiJtZXNzaUBuYXZlci5jb20iLCJpYXQiOjE1ODY3NTQyNjgsImV4cCI6MTU4Njc5MDI2OH0.FsfvnkuTj1yRTfD4B-C70izB5hHMAK4ypKfxnbrsZwY`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4`,
         },
       },
       isLoaded: false,
@@ -39,7 +39,6 @@ class PresentatorConsole extends React.Component {
     axios
       .get('http://localhost:3306/presentor/list', this.state.options)
       .then((result) => {
-        console.log('this is event list : ', result);
         this.setState({
           eventList: result.data,
           isLoaded: true,
@@ -57,7 +56,6 @@ class PresentatorConsole extends React.Component {
 
   render() {
     const { confirmationPopup, isLoaded, eventList } = this.state;
-    console.log(eventList);
     if (!isLoaded) {
       return <div>Loading</div>;
     } else {
@@ -98,8 +96,13 @@ class PresentatorConsole extends React.Component {
                     <div className="col">
                       <ul className="EventEntryList">
                         {eventList.map((event) => (
-                          <li>
-                            <EventEntry key={event.id} event={event} />
+                          <li key={event.id}>
+                            <Link 
+                              onClick={(e) => (!event.code_name ? e.preventDefault() : null)}
+                              to={`/eventPage?eventCode=${event.code_name}`}
+                            >
+                              <EventEntry event={event} />
+                            </Link>
                           </li>
                         ))}
                       </ul>

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionEntry() {
+export default function QuestionEntry({ question }) {
   const classes = useStyles();
 
   const [selected, setSelected] = React.useState(false);
@@ -49,7 +49,7 @@ export default function QuestionEntry() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          PPPS 런칭이벤트 질문입니다. Made By 김환, 전진철, 머지빌런
+          {question.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

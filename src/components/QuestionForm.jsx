@@ -1,49 +1,40 @@
-import React from 'react';
+import React, { useState } from "react";
 
-class Mainpage extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      question : null,
-    }
-  }
+const Mainpage = ({ sendMessage }) => {
 
-  handleChange = (e) => {
+  const [content, setContent] = useState('');
+  const handleChange = (e) => {
+    setContent(e.target.value);
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    this.setState({[name] : value});
+    sendMessage(content);
   }
 
-  handleSubmit = (e) => {
-    const { question } = this.state;
-    // 질문하기
-  }
+  return (
+    <div className="contact-clean">
+      {' '}
+      <form onSubmit={handleSubmit} >
+        <h2 className="text-center">Ask us</h2>
+        <div className="form-group">
+          <textarea
+            className="form-control"
+            name="message"
+            placeholder="Message"
+            rows="10"
+            onChange = {handleChange}
+          ></textarea>
+        </div>
+        <div className="form-group">
+          <button className="btn btn-primary" type="submit">
+            질문하기!
+          </button>
+        </div>
+      </form>
+    </div>
+  ) 
+};
 
-  render() {
-    return (
-      <div className="contact-clean">
-        {' '}
-        <form onSubmit={this.handleSubmit}>
-          <h2 className="text-center">Ask us</h2>
-          <div className="form-group">
-            <textarea
-              className="form-control"
-              name="message"
-              placeholder="Message"
-              rows="10"
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">
-              질문하기!
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
 
 export default Mainpage;
