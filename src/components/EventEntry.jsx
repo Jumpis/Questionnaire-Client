@@ -13,6 +13,7 @@ import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventEntry({ event : { eventname, code_name, createdAt} }) {
-
-  console.log(eventname, code_name, createdAt)
+export default function EventEntry({
+  event: { eventname, code_name, createdAt },
+}) {
+  console.log(eventname, code_name, createdAt);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -51,29 +52,29 @@ export default function EventEntry({ event : { eventname, code_name, createdAt} 
   return (
     <Card className={classes.root}>
       <CardHeader
-        avatar={(
+        avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            3PS
+            ANO
           </Avatar>
-        )}
-        action={(
+        }
+        action={
           <IconButton aria-label="settings">
             <DeleteIcon />
           </IconButton>
-        )}
-        title={eventname}
+        }
+        title={code_name}
         subheader={createdAt}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {code_name}
+          {eventname}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <Badge badgeContent={4} color="primary">
           <FavoriteIcon />
-        </IconButton>
-        <IconButton
+        </Badge>
+        {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}
@@ -82,9 +83,9 @@ export default function EventEntry({ event : { eventname, code_name, createdAt} 
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </IconButton>
+        </IconButton> */}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>세부정보 : </Typography>
           <Typography paragraph>
@@ -100,7 +101,7 @@ export default function EventEntry({ event : { eventname, code_name, createdAt} 
             배고프다...
           </Typography>
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }

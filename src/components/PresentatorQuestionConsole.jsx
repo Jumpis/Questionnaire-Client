@@ -9,10 +9,9 @@ import QuestionEntry from './QuestionEntry';
 import QuestionForm from './QuestionForm';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
-import PresentatorQuestionEntry from './PresentatorQuestionEntry';
 
 
-class EventPage extends React.Component {
+class PresentatorQuestionConsole extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +30,7 @@ class EventPage extends React.Component {
       <div className="presentatorConsole">
         <nav className="navbar navbar-light navbar-expand-md navigation-clean">
           <div className="container">
-            <div className="navbar-brand">Questionnaire</div>
+            <div className="navbar-brand">Company Name</div>
             <div
               className="collapse navbar-collapse"
               id="navcol-1"
@@ -45,16 +44,11 @@ class EventPage extends React.Component {
             <div className="row">
               <div className="col">
                 <div className="row">
-                <div className="col">
-                  <QuestionForm />
-                  </div>
-                </div>
-                <div className="row">
                   <div className="col">
                     <ul className="EventEntryList">
                       <li><EventEntry event={event}/></li>
                       <li><QuestionEntry /></li>
-                      <li><PresentatorQuestionEntry /></li>
+                      <li><EventEntry event={event}/></li>
                     </ul>
                   </div>
                 </div>
@@ -71,4 +65,4 @@ class EventPage extends React.Component {
 }
 
 
-export default withRouter(EventPage);
+export default withRouter(PresentatorQuestionConsole);
