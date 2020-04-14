@@ -3,25 +3,21 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Sidepic from '../assets/img/sidepic.jpg';
-import EventEntry from './EventEntry';
 import QuestionEntry from './QuestionEntry';
 import QuestionForm from './QuestionForm';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
-import PresentatorQuestionEntry from './PresentatorQuestionEntry';
-
 
 class EventPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
-      event : {
-        eventname : "test",
-        code_name : "777777",
-        created_at : new Date(),
-      }
+      event: {
+        eventname: 'test',
+        code_name: '777777',
+        created_at: new Date(),
+      },
     };
   }
 
@@ -32,10 +28,7 @@ class EventPage extends React.Component {
         <nav className="navbar navbar-light navbar-expand-md navigation-clean">
           <div className="container">
             <div className="navbar-brand">Questionnaire</div>
-            <div
-              className="collapse navbar-collapse"
-              id="navcol-1"
-            >
+            <div className="collapse navbar-collapse" id="navcol-1">
               <ul className="nav navbar-nav ml-auto" />
             </div>
           </div>
@@ -43,23 +36,29 @@ class EventPage extends React.Component {
         <header className="bg-primary text-white text-center">
           <div className="container">
             <div className="row">
+              <div className="col mt-3">
+                <QuestionForm />
+              </div>
               <div className="col">
                 <div className="row">
-                <div className="col">
-                  <QuestionForm />
-                  </div>
+                  <div className="col"></div>
                 </div>
                 <div className="row">
                   <div className="col">
                     <ul className="EventEntryList">
-                      <li><EventEntry event={event}/></li>
-                      <li><QuestionEntry /></li>
-                      <li><PresentatorQuestionEntry /></li>
+                      <li>
+                        <QuestionEntry />
+                      </li>
+                      <li>
+                        <QuestionEntry />
+                      </li>
+                      <li>
+                        <QuestionEntry />
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className="col"><img className="img-thumbnail img-fluid sidepicimg" src={Sidepic} /></div>
             </div>
           </div>
         </header>
@@ -69,6 +68,5 @@ class EventPage extends React.Component {
     );
   }
 }
-
 
 export default withRouter(EventPage);
