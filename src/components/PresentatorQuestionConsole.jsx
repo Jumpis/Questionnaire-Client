@@ -9,6 +9,7 @@ import QuestionEntry from './QuestionEntry';
 import QuestionForm from './QuestionForm';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
+import PresentatorQuestionEntry from './PresentatorQuestionEntry';
 
 
 class PresentatorQuestionConsole extends React.Component {
@@ -46,9 +47,9 @@ class PresentatorQuestionConsole extends React.Component {
                 <div className="row">
                   <div className="col">
                     <ul className="EventEntryList">
-                      <li><EventEntry event={event}/></li>
-                      <li><QuestionEntry /></li>
-                      <li><EventEntry event={event}/></li>
+                    <li><PresentatorQuestionEntry /></li>
+                    <li><PresentatorQuestionEntry /></li>
+                    <li><PresentatorQuestionEntry /></li>             
                     </ul>
                   </div>
                 </div>
