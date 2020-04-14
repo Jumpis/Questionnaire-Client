@@ -189,6 +189,7 @@
   margin: 10px;
   filter: blur(0px) hue-rotate(0deg) invert(17%) saturate(165%) sepia(46%);
   height: 650px;
+  background-attachment: scroll;
 }
 
 

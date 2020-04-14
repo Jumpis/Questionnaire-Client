@@ -3,8 +3,8 @@
 }
 
 .contact-clean {
-    background: #f1f7fc;
-    padding: 80px 0;
+    background: #18bc9c;
+    float: center;
   }
   
   @media (max-width:767px) {
@@ -15,10 +15,9 @@
   
   .contact-clean form {
     max-width: 480px;
-    width: 90%;
-    margin: 0 auto;
+    width: 425px;
     background-color: #ffffff;
-    padding: 40px;
+    padding: 20px;
     border-radius: 4px;
     color: #505e6c;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
@@ -61,6 +60,7 @@
     max-height: 260px;
     padding-top: 10px;
     resize: vertical;
+    height: 132px;
   }
   
   .contact-clean form .btn {
@@ -87,7 +87,7 @@
   }
   
   .contact-clean form .btn-primary {
-    background-color: #055ada !important;
+    background-color: #0ed7b0 !important;
     margin-top: 15px;
     color: #fff;
   }

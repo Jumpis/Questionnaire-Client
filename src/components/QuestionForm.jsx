@@ -10,20 +10,19 @@ const Mainpage = ({ sendMessage }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendMessage(content);
-
   }
 
   return (
-    <div className="questionForm">
+    <div className="contact-clean">
       {' '}
-      <form method="post" onSubmit={handleSubmit} >
-        <h2 className="text-center">Contact us</h2>
+      <form onSubmit={handleSubmit} >
+        <h2 className="text-center">Ask us</h2>
         <div className="form-group">
           <textarea
             className="form-control"
             name="message"
             placeholder="Message"
-            rows="14"
+            rows="10"
             onChange = {handleChange}
           ></textarea>
         </div>
@@ -34,14 +33,8 @@ const Mainpage = ({ sendMessage }) => {
         </div>
       </form>
     </div>
-  )
-  
-
-
-
-
-  
-}
+  ) 
+};
 
 
 export default Mainpage;

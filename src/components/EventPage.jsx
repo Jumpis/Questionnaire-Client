@@ -3,7 +3,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router-dom';
-import Sidepic from '../assets/img/sidepic.jpg';
 import QuestionEntry from './QuestionEntry';
 import QuestionForm from './QuestionForm';
 import CommonFooter from './CommonFooter';
@@ -37,12 +36,6 @@ const EventPage = ( { location } ) => {
 
     socket.on('allMessages', result => {
       setQuestions(result.data);
-
-      // questions.sort(function(a,b){
-      //   return (b.createdAt) - (a.createdAt);
-      // });
-      // console.log(questions)
-
     });
   }, [])
 
@@ -86,80 +79,6 @@ const EventPage = ( { location } ) => {
       <Copywrite />
     </div>
   );
-}
-
-
-/*
-class EventPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      content : '',
-      questions: [],
-      ENDPOINT : "localhost:3306",
-      eventId : '',
-      found : true,
-    };
-  }
-
-
-  componentDidMount(){
-    const { eventId } = queryString.parse(this.props.location.search);
-    socket = io(this.state.ENDPOINT);
-    this.setState({
-      eventId
-    });
-  }
-
-  getContent(content){
-    this.setState({
-      content
-    })
-  };
-
-  render() {
-    return (
-      <div className="presentatorConsole">
-        <nav className="navbar navbar-light navbar-expand-md navigation-clean">
-          <div className="container">
-            <div className="navbar-brand">Company Name</div>
-            <div
-              className="collapse navbar-collapse"
-              id="navcol-1"
-            >
-              <ul className="nav navbar-nav ml-auto" />
-            </div>
-          </div>
-        </nav>
-        <header className="bg-primary text-white text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <div className="row">
-                  <QuestionForm getContent={this.getContent} />
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <ul className="EventEntryList">
-                      {this.state.questions.map( question => (
-                        <li key={question.id}><QuestionEntry question={question}/></li>
-                      ) )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col"><img className="img-thumbnail img-fluid sidepicimg" src={Sidepic} /></div>
-            </div>
-          </div>
-        </header>
-        <CommonFooter />
-        <Copywrite />
-      </div>
-    );
-  }
-}
-
-*/
-
+};
 
 export default withRouter(EventPage);

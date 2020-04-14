@@ -7,7 +7,8 @@ import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import TestEntry from './components/EventEntry';
 import EventPage from './components/EventPage';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import PresentatorQuestionConsole from './components/PresentatorQuestionConsole';
 
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
         <Route exact path="/mainpage" render={() => <Mainpage />} />
         <Route exact path="/joinEventPage" render={() => <JoinEvent />} />
         <Route exact path="/presentatorConsole" render={() => <PresentatorConsole />} />
+        <Route exact path="/presentatorConsole/question" render={()=> <PresentatorQuestionConsole />} />
         <Route exact path="/eventPage" render={()=><EventPage />} />
         <Route exact path="/testEntry" render={() => <TestEntry />} />
         <Route exact path="/login" render={ () => {
