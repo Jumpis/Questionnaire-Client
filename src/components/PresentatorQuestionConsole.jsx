@@ -11,17 +11,16 @@ import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
 import PresentatorQuestionEntry from './PresentatorQuestionEntry';
 
-
 class PresentatorQuestionConsole extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
-      event : {
-        eventname : "test",
-        code_name : "777777",
-        created_at : new Date(),
-      }
+      event: {
+        eventname: 'test',
+        code_name: '777777',
+        created_at: new Date(),
+      },
     };
   }
 
@@ -32,11 +31,19 @@ class PresentatorQuestionConsole extends React.Component {
         <nav className="navbar navbar-light navbar-expand-md navigation-clean">
           <div className="container">
             <div className="navbar-brand">Company Name</div>
-            <div
-              className="collapse navbar-collapse"
-              id="navcol-1"
-            >
+            <div className="collapse navbar-collapse" id="navcol-1">
               <ul className="nav navbar-nav ml-auto" />
+              <li className="nav-item" role="presentation">
+                <div
+                  className="nav-link active"
+                  onClick={() => {
+                    this.props.logoutHandler();
+                    this.props.history.push('/');
+                  }}
+                >
+                  Log Out
+                </div>
+              </li>
             </div>
           </div>
         </nav>
@@ -47,14 +54,25 @@ class PresentatorQuestionConsole extends React.Component {
                 <div className="row">
                   <div className="col">
                     <ul className="EventEntryList">
-                    <li><PresentatorQuestionEntry /></li>
-                    <li><PresentatorQuestionEntry /></li>
-                    <li><PresentatorQuestionEntry /></li>             
+                      <li>
+                        <PresentatorQuestionEntry />
+                      </li>
+                      <li>
+                        <PresentatorQuestionEntry />
+                      </li>
+                      <li>
+                        <PresentatorQuestionEntry />
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className="col"><img className="img-thumbnail img-fluid sidepicimg" src={Sidepic} /></div>
+              <div className="col">
+                <img
+                  className="img-thumbnail img-fluid sidepicimg"
+                  src={Sidepic}
+                />
+              </div>
             </div>
           </div>
         </header>
@@ -64,6 +82,5 @@ class PresentatorQuestionConsole extends React.Component {
     );
   }
 }
-
 
 export default withRouter(PresentatorQuestionConsole);

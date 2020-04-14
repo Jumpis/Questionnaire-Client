@@ -16,18 +16,28 @@ const Mainpage = (props) => (
       <div className="container">
         <div className="row">
           <div className="col">
-            <img
-              className="img-fluid d-block mx-auto mb-5"
-              src={profileImg}
-              onClick={() => props.history.push('/userLoginPage')}
-            />
+            <div className="row justify-content-center">
+              <h2>발표자</h2>
+            </div>
+            <div className="row">
+              <img
+                className="img-fluid d-block mx-auto mb-5"
+                src={profileImg}
+                onClick={() => props.history.push('/userLoginPage')}
+              />
+            </div>
           </div>
           <div className="col">
-            <img
-              className="img-fluid d-block mx-auto mb-5"
-              src={questionImg}
-              onClick={() => props.history.push('/joinEventPage')}
-            />
+            <div className="row justify-content-center">
+              <h2>질문자</h2>
+            </div>
+            <div className="row">
+              <img
+                className="img-fluid d-block mx-auto mb-5"
+                src={questionImg}
+                onClick={() => props.history.push('/joinEventPage')}
+              />
+            </div>
           </div>
         </div>
         <h1>Questionnaire</h1>
