@@ -99,7 +99,7 @@ class PresentatorConsole extends React.Component {
                           <li key={event.id}>
                             <Link 
                               onClick={(e) => (!event.code_name ? e.preventDefault() : null)}
-                              to={`/eventPage?eventCode=${event.code_name}`}
+                              to={`/presentatorConsole/question?eventId=${event.id}`}
                             >
                               <EventEntry event={event} />
                             </Link>

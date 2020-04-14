@@ -34,13 +34,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PresentatorQuestionEntry() {
+export default function PresentatorQuestionEntry({ question, sendAnswered }) {
   const classes = useStyles();
 
   const [answered, setAnswered] = React.useState(false);
 
   const handleAnswered = () => {
     setAnswered(!answered);
+    // 소켓아이오 연결해서 서버를 통해 DB asnwered 부분 변경 요청 보내기
+    sendAnswered(answered, question.id);
+
   };
   return (
     <Card className={classes.root}>
@@ -50,12 +53,12 @@ export default function PresentatorQuestionEntry() {
             3PS
           </Avatar>
         }
-        title="질문자명" //props.wr
-        subheader="April 10, 2020"
+        title={question.questioner} //props.wr
+        subheader={question.createdAt}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          PPPS 런칭이벤트 질문입니다. Made By 김환, 전진철, 머지빌런
+          {question.content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

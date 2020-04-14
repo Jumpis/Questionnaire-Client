@@ -39,11 +39,11 @@ export default function QuestionEntry({ question }) {
             3PS
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <DeleteIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <DeleteIcon />
+        //   </IconButton>
+        // }
         title="PPPS 런칭이벤트 설문"
         subheader="April 10, 2020"
       />
