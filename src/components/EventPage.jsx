@@ -17,17 +17,34 @@ const EventPage = ({ location }) => {
   const [questions, setQuestions] = useState([]);
   const [found, setFound] = useState(true);
   const { eventId } = queryString.parse(location.search);
+  const authKey = localStorage.getItem('authKey');
 
   const sendMessage = (content) => {
-    return socket.emit('sendMessage', { content, eventId });
+    console.log('this is authKey to send : ', authKey)
+    return socket.emit('sendMessage', { content, eventId, authKey });
+  };
+
+  const sendLike = (questionId) => {
+    return socket.emit('sendLike', { authKey, questionId })
   };
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    socket.emit('join', { eventId });
+    socket.emit('join', { eventId , authKey });
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
+    socket.on('authKey', data => {
+      if(!localStorage.getItem('authKey')){
+        localStorage.setItem('authKey', data.newAuthKey);
+      };
+    })
+
+    socket.on('needNewKey', data => {
+      localStorage.removeItem('authKey');
+      socket.emit('join', { eventId, authKey })
+    });
+
     socket.on('notfound', () => {
       setFound(false);
     });
@@ -35,6 +52,12 @@ const EventPage = ({ location }) => {
     socket.on('allMessages', (result) => {
       setQuestions(result.data);
     });
+
+    socket.on('sendLikeResult', ({instance, created}) => {
+      console.log(instance, created)
+    })
+
+
   }, []);
 
   return (
@@ -60,7 +83,7 @@ const EventPage = ({ location }) => {
                   .sort((a, b) => b.id - a.id)
                   .map((question) => (
                     <li key={question.id}>
-                      <QuestionEntry question={question} />
+                      <QuestionEntry question={question} sendLike={sendLike}  />
                     </li>
                   ))}
               </ul>

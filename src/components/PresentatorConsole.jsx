@@ -19,7 +19,7 @@ class PresentatorConsole extends React.Component {
       confirmationPopup: false,
       options: {
         headers: {
-          Authorization: this.props.token,
+          Authorization: `Bearer ${this.props.token}`,
         },
       },
       isLoaded: false,
@@ -71,6 +71,8 @@ class PresentatorConsole extends React.Component {
                     <div
                       className="nav-link active"
                       onClick={() => {
+                        alert('clicked!')
+                        
                         this.props.logoutHandler();
                         this.props.history.push('/');
                       }}
@@ -110,11 +112,9 @@ class PresentatorConsole extends React.Component {
                       <ul className="EventEntryList">
                         {eventList.map((event) => (
                           <li key={event.id}>
-                            <Link
-                              onClick={(e) =>
-                                !event.code_name ? e.preventDefault() : null
-                              }
-                              to={`/eventPage?eventCode=${event.code_name}`}
+                            <Link 
+                              onClick={(e) => (!event.code_name ? e.preventDefault() : null)}
+                              to={`/presentatorConsole/question?eventId=${event.id}`}
                             >
                               <EventEntry event={event} />
                             </Link>

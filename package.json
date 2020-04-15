@@ -25,7 +25,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "socket.io-client": "^2.3.0",
-    "tether": "^1.4.7"
+    "tether": "^1.4.7",
+    "use-state-with-callback": "^1.0.18"
   },
   "scripts": {
     "start": "react-scripts start",
