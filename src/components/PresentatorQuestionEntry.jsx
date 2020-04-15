@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -36,18 +36,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PresentatorQuestionEntry({ question, sendAnswered }) {
+
   const classes = useStyles();
+  const firstUpdate = useRef(true);
 
-  const [answered, setAnswered] = useStateWithCallback(question.answered, answered => {
-    // 소켓아이오 연결해서 서버를 통해 DB asnwered 부분 변경 요청 보내기
-    console.log('sendAnswered event')
+  const [answered, setAnswered] = useState(question.answered)
+
+  useEffect(() => {
+      if(firstUpdate.current){
+        firstUpdate.current = false;
+      return;
+    }
     sendAnswered(answered, question.id);
-  })
-
+  }, [answered]);
+  
   const handleAnswered = () => {
     setAnswered(!answered)
   };
-
 
   return (
     <Card className={classes.root}>
@@ -57,8 +62,8 @@ export default function PresentatorQuestionEntry({ question, sendAnswered }) {
             3PS
           </Avatar>
         }
-        title={question.questioner} //props.wr
-        subheader={question.createdAt}
+        title='question' //props.wr
+        subheader={question.createdAt.slice(0,16).replace('T',' ')}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -66,7 +71,7 @@ export default function PresentatorQuestionEntry({ question, sendAnswered }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Badge badgeContent={4} color="primary">
+        <Badge badgeContent={question.numberOfLikes}  color="primary">
           <FavoriteIcon />
         </Badge>
         <ToggleButton

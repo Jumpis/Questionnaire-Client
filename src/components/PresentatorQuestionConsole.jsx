@@ -12,7 +12,7 @@ import queryString from 'query-string';
 
 let socket;
 
-const PresentatorQuestionConsole = ({ location, history, logoutHandler}) => {
+const PresentatorQuestionConsole = ({ location, history, logoutHandler, token, username }) => {
 
 
   const { eventId } = queryString.parse(location.search);
@@ -24,12 +24,6 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler}) => {
   const sendAnswered = (boolean, questionId) => {    
     return socket.emit('sendAnswered', { boolean, questionId, eventId });
   };
-
-  // const [event, setEvent] = useState({
-  //   eventname : "test",
-  //   code_name : "777777",
-  //   created_at : new Date(),
-  // });
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -51,7 +45,7 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler}) => {
     <div className="presentatorConsole">
     <nav className="navbar navbar-light navbar-expand-md navigation-clean">
       <div className="container">
-        <div className="navbar-brand">Company Name</div>
+      <div className="navbar-brand">{`${username}님 안녕하세요`}</div>
         <div className="collapse navbar-collapse" id="navcol-1">
           <ul className="nav navbar-nav ml-auto" />
           <li className="nav-item" role="presentation">
@@ -76,13 +70,13 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler}) => {
               <div className="col">
                 <ul className="EventEntryList">
                 {questions
-  .map((question) => question)
-  .sort((a, b) => b.id - a.id)
-  .map((question) => (
-    <li key={question.id}>
-      <PresentatorQuestionEntry question={question} sendAnswered={sendAnswered} />
-    </li>
-  ))}   
+                  .map((question) => question)
+                  .sort((a, b) => b.numberOfLikes - a.numberOfLikes)
+                  .map((question) => (
+                    <li key={question.id}>
+                      <PresentatorQuestionEntry question={question} sendAnswered={sendAnswered} />
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -103,81 +97,3 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler}) => {
 };
 
 export default withRouter(PresentatorQuestionConsole);
-
-
-
-/* 
-class PresentatorQuestionConsole extends React.Component {
-  constructor(props) {
-    super(props);
-    // state token 으로 초기화
-    this.state = {
-      questions: [],
-      event: {
-        eventname: 'test',
-        code_name: '777777',
-        created_at: new Date(),
-      },
-    };
-  }
-
-  render() {
-    // const { questions, event } = this.state;
-    return (
-      <div className="presentatorConsole">
-        <nav className="navbar navbar-light navbar-expand-md navigation-clean">
-          <div className="container">
-            <div className="navbar-brand">{this.props.username}</div>
-            <div className="collapse navbar-collapse" id="navcol-1">
-              <ul className="nav navbar-nav ml-auto" />
-              <li className="nav-item" role="presentation">
-                <div
-                  className="nav-link active"
-                  onClick={() => {
-                    this.props.logoutHandler();
-                    this.props.history.push('/');
-                  }}
-                >
-                  Log Out
-                </div>
-              </li>
-            </div>
-          </div>
-        </nav>
-        <header className="bg-primary text-white text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <div className="row">
-                  <div className="col">
-                    <ul className="EventEntryList">
-                      <li>
-                        <PresentatorQuestionEntry />
-                      </li>
-                      <li>
-                        <PresentatorQuestionEntry />
-                      </li>
-                      <li>
-                        <PresentatorQuestionEntry />
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <img
-                  className="img-thumbnail img-fluid sidepicimg"
-                  src={Sidepic}
-                />
-              </div>
-            </div>
-          </div>
-        </header>
-        <CommonFooter />
-        <Copywrite />
-      </div>
-    );
-  }
-}
-*/
-

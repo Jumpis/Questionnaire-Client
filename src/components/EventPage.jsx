@@ -20,12 +20,11 @@ const EventPage = ({ location }) => {
   const authKey = localStorage.getItem('authKey');
 
   const sendMessage = (content) => {
-    console.log('this is authKey to send : ', authKey)
     return socket.emit('sendMessage', { content, eventId, authKey });
   };
 
   const sendLike = (questionId) => {
-    return socket.emit('sendLike', { authKey, questionId })
+    return socket.emit('sendLike', { authKey, questionId, eventId })
   };
 
   useEffect(() => {
@@ -53,18 +52,13 @@ const EventPage = ({ location }) => {
       setQuestions(result.data);
     });
 
-    socket.on('sendLikeResult', ({instance, created}) => {
-      console.log(instance, created)
-    })
-
-
   }, []);
 
   return (
     <div className="presentatorConsole">
       <nav className="navbar navbar-light navbar-expand-md navigation-clean">
         <div className="container">
-          <div className="navbar-brand">Company Name</div>
+          <div className="navbar-brand">Questionnaire</div>
           <div className="collapse navbar-collapse" id="navcol-1">
             <ul className="nav navbar-nav ml-auto" />
           </div>
@@ -80,7 +74,8 @@ const EventPage = ({ location }) => {
               <ul className="EventEntryList">
                 {questions
                   .map((question) => question)
-                  .sort((a, b) => b.id - a.id)
+                  .sort((a, b) => b.numberOfLikes - a.numberOfLikes)
+                  .filter((question) => !question.answered)
                   .map((question) => (
                     <li key={question.id}>
                       <QuestionEntry question={question} sendLike={sendLike}  />

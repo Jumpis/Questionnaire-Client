@@ -58,13 +58,13 @@ class PresentatorConsole extends React.Component {
   render() {
     const { confirmationPopup, isLoaded, eventList } = this.state;
     if (!isLoaded) {  
-      return <div>Loading</div>;
+      return <div>Loading</div>
     } else {
       return (
         <div className="presentatorConsole">
           <nav className="navbar navbar-light navbar-expand-md navigation-clean">
             <div className="container">
-              <div className="navbar-brand">{this.props.username}</div>
+              <div className="navbar-brand">{`${this.props.username}님 안녕하세요`}</div>
               <div className="collapse navbar-collapse" id="navcol-1">
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item" role="presentation">

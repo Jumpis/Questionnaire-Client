@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -31,6 +31,7 @@ export default function QuestionEntry({ question, sendLike }) {
   const classes = useStyles();
 
   const [selected, setSelected] = useState(false)
+  const firstUpdate = useRef(true);
 
   const handleLike = () => {
     console.log('clicked!')
@@ -38,11 +39,18 @@ export default function QuestionEntry({ question, sendLike }) {
   }
 
   useEffect(() => {
+    if(firstUpdate.current){
+      firstUpdate.current = false;
+      return;
+    }
     sendLike(question.id);
-    console.log('sendLike IO event!')
-
+    console.log('sendLike Emit')
   }, [selected]);
 
+
+
+  let characters = ['무지', '콘', '어피치', '제이지', '프로도', '네오', '튜브', '라이언']
+  let adj = ['부끄러운', '배고픈', '화난', '졸린', '기쁜', '저기여기들어오시면안되는', ''];
 
   return (
     <Card className={classes.root}>
@@ -52,13 +60,10 @@ export default function QuestionEntry({ question, sendLike }) {
             3PS
           </Avatar>
         }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <DeleteIcon />
-        //   </IconButton>
-        // }
-        title="PPPS 런칭이벤트 설문"
-        subheader="April 10, 2020"
+        title={
+          `${adj[Math.floor(Math.random() * (adj.length - 1) )]} ${characters[Math.floor(Math.random() * (characters.length - 1))]}`  
+        }
+        subheader={question.createdAt.slice(0,16).replace('T',' ')}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -69,9 +74,9 @@ export default function QuestionEntry({ question, sendLike }) {
         <ToggleButton
           value="check"
           selected={selected}
-          onClick={handleLike}
+          onChange={handleLike}
         >
-          <Badge badgeContent={4} color="primary">
+          <Badge badgeContent={question.numberOfLikes} color="primary">
             <FavoriteIcon />
           </Badge>
         </ToggleButton>

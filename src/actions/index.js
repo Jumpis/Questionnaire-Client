@@ -13,7 +13,7 @@ export const setToken = token => ({
   token
 });
 
-export const setUserName = userinfo => ({
+export const setUserName = username => ({
   type: SET_USERNAME,
-  userinfo
+  username
 });
