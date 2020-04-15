@@ -17,8 +17,6 @@ const EventPage = ({ location }) => {
   const [questions, setQuestions] = useState([]);
   const [found, setFound] = useState(true);
   const { eventId } = queryString.parse(location.search);
-
-  const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4'
   const authKey = localStorage.getItem('authKey');
 
   const sendMessage = (content) => {
