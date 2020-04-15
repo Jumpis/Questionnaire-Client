@@ -4,9 +4,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Sidepic from '../assets/img/sidepic.jpg';
-import EventEntry from './EventEntry';
-import QuestionEntry from './QuestionEntry';
-import QuestionForm from './QuestionForm';
 import CommonFooter from './CommonFooter';
 import Copywrite from './Copywrite';
 import PresentatorQuestionEntry from './PresentatorQuestionEntry';
@@ -14,6 +11,7 @@ import PresentatorQuestionEntry from './PresentatorQuestionEntry';
 class PresentatorQuestionConsole extends React.Component {
   constructor(props) {
     super(props);
+    // state token 으로 초기화
     this.state = {
       questions: [],
       event: {
@@ -25,12 +23,12 @@ class PresentatorQuestionConsole extends React.Component {
   }
 
   render() {
-    const { questions, event } = this.state;
+    // const { questions, event } = this.state;
     return (
       <div className="presentatorConsole">
         <nav className="navbar navbar-light navbar-expand-md navigation-clean">
           <div className="container">
-            <div className="navbar-brand">Company Name</div>
+            <div className="navbar-brand">{this.props.username}</div>
             <div className="collapse navbar-collapse" id="navcol-1">
               <ul className="nav navbar-nav ml-auto" />
               <li className="nav-item" role="presentation">

@@ -6,18 +6,24 @@ import UserLogin from './components/UserLogin';
 import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import EventPage from './components/EventPage';
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setLoggedIn, setToken, setUserName} from '../src/actions/index'
 import PresentatorQuestionConsole from './components/PresentatorQuestionConsole';
 
 export default function App() {
-  const [isLogin, setIsLogin] = useState(false);
-
-  function isLoginHandler() {
-    setIsLogin(true);
+  const {  username, isLogin, token } = useSelector(state => ({username : state.username, isLogin : state.isLogin, token : state.token}));
+  const dispatch = useDispatch();
+  function isLoginHandler(username, token) {
+    dispatch(setLoggedIn(true));
+    dispatch(setToken(token));
+    dispatch(setUserName(username));
   }
 
   function logoutHandler() {
-    setIsLogin(false);
+    dispatch(setLoggedIn(false));
+    dispatch(setToken(null));
+    dispatch(setUserName(null));
   }
 
   return (
@@ -34,10 +40,10 @@ export default function App() {
           exact
           path="/presentatorConsole"
           render={() => {
-            if (!isLogin) {
+            if (isLogin) {
               return <Redirect to="/userLoginPage" />;
             } else {
-              return <PresentatorConsole logoutHandler={logoutHandler} />;
+              return <PresentatorConsole logoutHandler={logoutHandler} username={username} token={token} />;
             }
           }}
         />
@@ -48,7 +54,7 @@ export default function App() {
             if (!isLogin) {
               return <Redirect to="/userLoginPage" />;
             } else {
-              return <PresentatorQuestionConsole logoutHandler={logoutHandler} />;
+              return <PresentatorQuestionConsole logoutHandler={logoutHandler} username={username} token={token} />;
             }
           }}
         />

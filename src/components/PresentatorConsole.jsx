@@ -19,7 +19,7 @@ class PresentatorConsole extends React.Component {
       confirmationPopup: false,
       options: {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4`,
+          Authorization: this.props.token,
         },
       },
       isLoaded: false,
@@ -54,9 +54,6 @@ class PresentatorConsole extends React.Component {
     this.getList();
   };
 
-  handleLogOut = () => {
-    // todo;
-  };
 
   render() {
     const { confirmationPopup, isLoaded, eventList } = this.state;
@@ -67,7 +64,7 @@ class PresentatorConsole extends React.Component {
         <div className="presentatorConsole">
           <nav className="navbar navbar-light navbar-expand-md navigation-clean">
             <div className="container">
-              <div className="navbar-brand">Company Name</div>
+              <div className="navbar-brand">{this.props.username}</div>
               <div className="collapse navbar-collapse" id="navcol-1">
                 <ul className="nav navbar-nav ml-auto">
                   <li className="nav-item" role="presentation">
