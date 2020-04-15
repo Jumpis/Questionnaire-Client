@@ -7,20 +7,28 @@ import JoinEvent from './components/JoinEvent';
 import PresentatorConsole from './components/PresentatorConsole';
 import EventPage from './components/EventPage';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import {setLoggedIn, setToken, setUserName} from '../src/actions/index'
 import PresentatorQuestionConsole from './components/PresentatorQuestionConsole';
 
 export default function App() {
-  const {  username, isLogin, token } = useSelector(state => ({username : state.username, isLogin : state.isLogin, token : state.token}));
+
+  const { username, isLogin, token } = useSelector((state) => ({
+    username: state.settingReducer.username,
+    isLogin: state.settingReducer.isLogin,
+    token: state.tokenReducer.token,
+  }));
+
+  console.log(username, isLogin, token)
+
   const dispatch = useDispatch();
-  function isLoginHandler(username, token) {
+  const isLoginHandler = (username, token) => {
     dispatch(setLoggedIn(true));
     dispatch(setToken(token));
     dispatch(setUserName(username));
   }
 
-  function logoutHandler() {
+  const logoutHandler = () => {
     dispatch(setLoggedIn(false));
     dispatch(setToken(null));
     dispatch(setUserName(null));
@@ -40,9 +48,11 @@ export default function App() {
           exact
           path="/presentatorConsole"
           render={() => {
-            if (isLogin) {
+            if (!isLogin) {
+              console.log(isLogin)
               return <Redirect to="/userLoginPage" />;
             } else {
+              console.log(isLogin)
               return <PresentatorConsole logoutHandler={logoutHandler} username={username} token={token} />;
             }
           }}

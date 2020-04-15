@@ -66,11 +66,14 @@ class UserLogin extends React.Component {
         email,
         password
       })
-      .then( result => {
+      .then(result => {
         console.log('this is result : ', result)
         if(result.data.token){
+          console.dir(result.data)
           this.props.isLoginHandler(result.data.username, result.data.token);
-          this.props.history.push('/login')
+
+          console.log('history push')
+          this.props.history.push('/presentatorConsole')
         } else {
           console.log('no data')
         }
