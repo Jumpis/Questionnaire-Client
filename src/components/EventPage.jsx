@@ -26,9 +26,12 @@ const EventPage = ({ location }) => {
     return socket.emit('sendMessage', { content, eventId, authKey });
   };
 
+  const sendLike = (questionId) => {
+    return socket.emit('sendLike', { authKey, questionId })
+  };
+
   useEffect(() => {
     socket = io(ENDPOINT);
-
     socket.emit('join', { eventId , authKey });
   }, [ENDPOINT, location.search]);
 
@@ -51,6 +54,12 @@ const EventPage = ({ location }) => {
     socket.on('allMessages', (result) => {
       setQuestions(result.data);
     });
+
+    socket.on('sendLikeResult', ({instance, created}) => {
+      console.log(instance, created)
+    })
+
+
   }, []);
 
   return (
@@ -76,7 +85,7 @@ const EventPage = ({ location }) => {
                   .sort((a, b) => b.id - a.id)
                   .map((question) => (
                     <li key={question.id}>
-                      <QuestionEntry question={question} />
+                      <QuestionEntry question={question} sendLike={sendLike}  />
                     </li>
                   ))}
               </ul>

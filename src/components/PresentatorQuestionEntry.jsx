@@ -40,6 +40,7 @@ export default function PresentatorQuestionEntry({ question, sendAnswered }) {
 
   const [answered, setAnswered] = useStateWithCallback(question.answered, answered => {
     // 소켓아이오 연결해서 서버를 통해 DB asnwered 부분 변경 요청 보내기
+    console.log('sendAnswered event')
     sendAnswered(answered, question.id);
   })
 

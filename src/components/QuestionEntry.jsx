@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -12,6 +12,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import Badge from '@material-ui/core/Badge';
 import DeleteIcon from '@material-ui/icons/Delete';
+import useStateWithCallback from 'use-state-with-callback';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +27,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuestionEntry({ question }) {
+export default function QuestionEntry({ question, sendLike }) {
   const classes = useStyles();
 
-  const [selected, setSelected] = React.useState(false);
+  const [selected, setSelected] = useState(false)
+
+  const handleLike = () => {
+    console.log('clicked!')
+    setSelected(!selected)
+  }
+
+  useEffect(() => {
+    sendLike(question.id);
+    console.log('sendLike IO event!')
+
+  }, [selected]);
+
 
   return (
     <Card className={classes.root}>
@@ -56,9 +69,7 @@ export default function QuestionEntry({ question }) {
         <ToggleButton
           value="check"
           selected={selected}
-          onChange={() => {
-            setSelected(!selected);
-          }}
+          onClick={handleLike}
         >
           <Badge badgeContent={4} color="primary">
             <FavoriteIcon />

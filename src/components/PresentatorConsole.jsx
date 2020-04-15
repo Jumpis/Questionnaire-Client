@@ -19,7 +19,7 @@ class PresentatorConsole extends React.Component {
       confirmationPopup: false,
       options: {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjgzMTYyNSwiZXhwIjoxNTg2ODY3NjI1fQ.Ygowz7oMBTSJxjy6n4n5eWC_CHO32ImprhVJ1j0gGZ4`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Iuq5gOyVhOustOqwnCIsImVtYWlsIjoia2ltQG5hdmVyLmNvbSIsImlhdCI6MTU4NjkxNzc3NSwiZXhwIjoxNTg3NzgxNzc1fQ.OsJe49iB0AOkAK3y1gGOle87G8h-SkMxpFV7VKgafZU`,
         },
       },
       isLoaded: false,
