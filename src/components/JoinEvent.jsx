@@ -52,9 +52,7 @@ class JoinEvent extends React.Component {
     event.preventDefault();
 
     if (validateForm(errors)) {
-      console.info('Valid Form');
-      // 질문방 참여 request
-      axios.post('http://localhost:3306/audience/join', {
+      axios.post('http://15.164.163.19:3306/audience/join', {
         code_name : eventcode
       })
       .then(result => {

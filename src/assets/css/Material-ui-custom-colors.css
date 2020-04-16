@@ -91,4 +91,8 @@
     margin-top: 15px;
     color: #fff;
   }
+
+  .cursor_over {
+    cursor: pointer;
+  }
   

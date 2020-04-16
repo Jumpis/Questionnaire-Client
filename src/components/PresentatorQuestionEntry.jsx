@@ -5,15 +5,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import Badge from '@material-ui/core/Badge';
-import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
-import useStateWithCallback from 'use-state-with-callback';
 
 const useStyles = makeStyles((theme) => ({
   root: {

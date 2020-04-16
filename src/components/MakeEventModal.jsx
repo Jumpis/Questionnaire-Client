@@ -35,6 +35,7 @@ class MakeEventModal extends React.Component {
         codename: '',
       },
       isLoaded : false,
+      duplicated : false,
     };
   }
 
@@ -66,20 +67,24 @@ class MakeEventModal extends React.Component {
     if (validateForm(errors)) {
       console.info('Valid Form');
       axios.post( 
-        'http://localhost:3306/presentor/create', {
+        'http://15.164.163.19:3306/presentor/create', {
         eventname,
         codename,
-        // presentatorid : 6
       }, this.state.options)
-      .then( data => {        
-        this.props.reRender();
-
+      .then( data => {
+        if(data.duplicated){
+          this.setState({
+            duplicated : true
+          })
+        } else {
+          this.props.reRender();
+          onCancel();
+        }        
       })
       .catch(err => {
         console.log(err)
       });
 
-      onCancel();
     } else {
       console.error('Invalid Form');
     }
@@ -87,7 +92,7 @@ class MakeEventModal extends React.Component {
 
   render() {
     const { onCancel } = this.props;
-    const { errors } = this.state;
+    const { errors, duplicated } = this.state;
     return (
       <div className="makeEvent modal">
         <div className="register-photo">
@@ -121,6 +126,8 @@ class MakeEventModal extends React.Component {
                 />
                 {errors.codename.length > 0
                 && <span className="error">{errors.codename}</span>}
+                {duplicated
+                && <span className="error">{'존재하는 이벤트 코드입니다'}</span>}
               </div>
               <div className="form-group">
                 <button

@@ -3,14 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blueGrey } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,11 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventEntry({ event : { eventname, code_name, createdAt} }) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card className={classes.root}>
@@ -64,11 +56,6 @@ export default function EventEntry({ event : { eventname, code_name, createdAt} 
           {eventname}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <Badge badgeContent={4} color="primary">
-          <FavoriteIcon />
-        </Badge>
-      </CardActions>
     </Card>
   );
 }

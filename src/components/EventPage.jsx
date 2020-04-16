@@ -13,14 +13,13 @@ import io from 'socket.io-client';
 let socket;
 
 const EventPage = ({ location }) => {
-  const ENDPOINT = 'localhost:3306';
+  const ENDPOINT = '15.164.163.19:3306';
   const [questions, setQuestions] = useState([]);
   const [found, setFound] = useState(true);
   const { eventId } = queryString.parse(location.search);
   const authKey = localStorage.getItem('authKey');
 
   const sendMessage = (content) => {
-    console.log('this is sendMessage AuthKey : ', authKey)
     return socket.emit('sendMessage', { content, eventId, authKey });
   };
 

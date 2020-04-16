@@ -5,14 +5,11 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { blueGrey } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import Badge from '@material-ui/core/Badge';
-import DeleteIcon from '@material-ui/icons/Delete';
-import useStateWithCallback from 'use-state-with-callback';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +31,6 @@ export default function QuestionEntry({ question, sendLike }) {
   const firstUpdate = useRef(true);
 
   const handleLike = () => {
-    console.log('clicked!')
     setSelected(!selected)
   }
 
@@ -44,10 +40,7 @@ export default function QuestionEntry({ question, sendLike }) {
       return;
     }
     sendLike(question.id);
-    console.log('sendLike Emit')
   }, [selected]);
-
-
 
   let characters = ['무지', '콘', '어피치', '제이지', '프로도', '네오', '튜브', '라이언']
   let adj = ['부끄러운', '배고픈', '화난', '졸린', '기쁜', '저기여기들어오시면안되는', ''];
