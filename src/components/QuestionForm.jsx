@@ -9,6 +9,7 @@ const Mainpage = ({ sendMessage }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendMessage(content);
+    document.getElementById('pppsq').value = '';
   }
 
   return (
@@ -18,11 +19,13 @@ const Mainpage = ({ sendMessage }) => {
         <h2 className="text-center">Ask us</h2>
         <div className="form-group">
           <textarea
+            id = 'pppsq'
             className="form-control"
             name="message"
             placeholder="Message"
             rows="10"
             onChange = {handleChange}
+
           ></textarea>
         </div>
         <div className="form-group">

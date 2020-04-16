@@ -11,6 +11,17 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import Badge from '@material-ui/core/Badge';
 
+const getIndexBelowMaxForKey = function(str, max) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+    hash &= hash; // Convert to 32bit integer
+    hash = Math.abs(hash);
+  }
+  return hash % max;
+};
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -54,7 +65,7 @@ export default function QuestionEntry({ question, sendLike }) {
           </Avatar>
         }
         title={
-          `${adj[Math.floor(Math.random() * (adj.length - 1) )]} ${characters[Math.floor(Math.random() * (characters.length - 1))]}`  
+          `${adj[getIndexBelowMaxForKey(question.questioner, 8)]} ${characters[getIndexBelowMaxForKey(question.questioner,7)]}`
         }
         subheader={question.createdAt.slice(0,16).replace('T',' ')}
       />
