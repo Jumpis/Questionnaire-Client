@@ -59,7 +59,8 @@ class SignUpModal extends React.Component {
     this.setState({ errors, [name]: value });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit1 = (event) => {
+    console.log('signUpModal Handlesubmit')
     const {
       errors, email, password, username,
     } = this.state;
@@ -89,7 +90,7 @@ class SignUpModal extends React.Component {
         <div className="register-photo">
           <div className="form-container">
             <div className="image-holder" />
-            <form onSubmit={this.handleSubmit} noValidate>
+            <form onSubmit={this.handleSubmit1} noValidate>
               <h2 className="text-center">
                 <strong>Create</strong>
                 {' '}

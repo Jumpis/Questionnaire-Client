@@ -56,6 +56,9 @@ class UserLogin extends React.Component {
   };
 
   handleSubmit = (event) => {
+
+    console.log('UserLogin Handlesubmit')
+
     const { errors, email, password } = this.state;
     console.log('this is props : ', this.props)
 
