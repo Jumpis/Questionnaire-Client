@@ -100,6 +100,7 @@ class PresentatorConsole extends React.Component {
                       {confirmationPopup && (
                         <Portal>
                           <MakeEventModal
+                            token={this.props.token}
                             onCancel={() => this.close()}
                             reRender={this.reReder}
                           />

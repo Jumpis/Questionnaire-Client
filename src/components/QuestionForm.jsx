@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 
 const Mainpage = ({ sendMessage }) => {
-
   const [content, setContent] = useState('');
   const handleChange = (e) => {
     setContent(e.target.value);

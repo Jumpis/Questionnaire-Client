@@ -20,6 +20,7 @@ const EventPage = ({ location }) => {
   const authKey = localStorage.getItem('authKey');
 
   const sendMessage = (content) => {
+    console.log('this is sendMessage AuthKey : ', authKey)
     return socket.emit('sendMessage', { content, eventId, authKey });
   };
 
