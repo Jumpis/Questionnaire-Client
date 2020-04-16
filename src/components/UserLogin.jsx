@@ -56,33 +56,21 @@ class UserLogin extends React.Component {
   };
 
   handleSubmit = (event) => {
-
-    console.log('UserLogin Handlesubmit')
-
     const { errors, email, password } = this.state;
-    console.log('this is props : ', this.props)
 
     event.preventDefault();
     if (validateForm(errors)) {
       console.info('Valid Form');
-      axios.post('http://localhost:3306/user/signin', {
+      axios.post('http://15.164.163.19:3306/user/signin', {
         email,
         password
       })
       .then(result => {
-        console.log('this is result : ', result)
         if(result.data.token){
-          console.dir(result.data)
           this.props.isLoginHandler(result.data.username, result.data.token);
-
-          console.log('history push')
           this.props.history.push('/presentatorConsole')
-        } else {
-          console.log('no data')
-        }
+        } 
       });
-      // request
-      // response : token, presentator id
     } else {
       console.error('Invalid Form');
     }

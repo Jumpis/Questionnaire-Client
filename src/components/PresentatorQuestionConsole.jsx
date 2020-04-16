@@ -16,7 +16,7 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler, token, u
 
 
   const { eventId } = queryString.parse(location.search);
-  const ENDPOINT = 'localhost:3306';
+  const ENDPOINT = '15.164.163.19:3306';
 
   const [questions, setQuestions] = useState([]);
   const [found, setFound] = useState(true);
@@ -36,7 +36,6 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler, token, u
     });
 
     socket.on('allMessages', (result) => {
-      console.log('this is received data : ', result)
       setQuestions(result.data);
     });
   }, []);
@@ -50,7 +49,7 @@ const PresentatorQuestionConsole = ({ location, history, logoutHandler, token, u
           <ul className="nav navbar-nav ml-auto" />
           <li className="nav-item" role="presentation">
             <div
-              className="nav-link active"
+              className="nav-link active cursor_over"
               onClick={() => {
                 logoutHandler();
                 history.push('/');

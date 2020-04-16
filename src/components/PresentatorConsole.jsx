@@ -37,7 +37,7 @@ class PresentatorConsole extends React.Component {
 
   getList = () => {
     axios
-      .get('http://localhost:3306/presentor/list', this.state.options)
+      .get('http://15.164.163.19:3306/presentor/list', this.state.options)
       .then((result) => {
         this.setState({
           eventList: result.data,
@@ -66,13 +66,11 @@ class PresentatorConsole extends React.Component {
             <div className="container">
               <div className="navbar-brand">{`${this.props.username}님 안녕하세요`}</div>
               <div className="collapse navbar-collapse" id="navcol-1">
-                <ul className="nav navbar-nav ml-auto">
+                <ul className="nav navbar-nav ml-auto" />
                   <li className="nav-item" role="presentation">
                     <div
-                      className="nav-link active"
-                      onClick={() => {
-                        alert('clicked!')
-                        
+                      className="nav-link active cursor_over"
+                      onClick={() => {                  
                         this.props.logoutHandler();
                         this.props.history.push('/');
                       }}
@@ -80,7 +78,6 @@ class PresentatorConsole extends React.Component {
                       Log Out
                     </div>
                   </li>
-                </ul>
               </div>
             </div>
           </nav>

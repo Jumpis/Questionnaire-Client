@@ -60,7 +60,6 @@ class SignUpModal extends React.Component {
   };
 
   handleSubmit1 = (event) => {
-    console.log('signUpModal Handlesubmit')
     const {
       errors, email, password, username,
     } = this.state;
@@ -69,7 +68,7 @@ class SignUpModal extends React.Component {
     if (validateForm(errors)) {
       console.info('Valid Form');
       // request
-      axios.post('http://localhost:3306/user/signup', {
+      axios.post('http://15.164.163.19:3306/user/signup', {
         email,
         password,
         username,
@@ -90,7 +89,7 @@ class SignUpModal extends React.Component {
         <div className="register-photo">
           <div className="form-container">
             <div className="image-holder" />
-            <form onSubmit={this.handleSubmit1} noValidate>
+            <form noValidate>
               <h2 className="text-center">
                 <strong>Create</strong>
                 {' '}
@@ -135,7 +134,8 @@ class SignUpModal extends React.Component {
               <div className="form-group">
                 <button
                   className="btn btn-primary btn-block"
-                  type="submit"
+                  type="button"
+                  onClick={this.handleSubmit1}
                 >
                   Sign Up
                 </button>
