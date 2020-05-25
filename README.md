@@ -12,16 +12,21 @@
 
 # Demonstration Images 
 
-Mainpage
+- Mainpage
 <img src="/src/assets/img/main.png?raw=true">
-Login&EventJoin
+
+- Login&EventJoin
 <img src="/src/assets/img/login.png?raw=true">
-EventAddPage
+
+- EventAddPage
 <img src="/src/assets/img/event.png?raw=true">
-AddEvent
+
+- AddEvent
 <img src="/src/assets/img/eventcreate.png?raw=true">
-Presentator Event page & Listener event page
+
+- Presentator Event page & Listener event page
 <img src="/src/assets/img/event2.png?raw=true">
-Realtime
+
+- Realtime
 <img src="/src/assets/img/realtime.gif?raw=true">
 
